@@ -1,0 +1,31 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+h1{
+    font-size: 60px;
+    margin-bottom: 50px;
+}
+
+.lg-txt{
+    font-size: 70px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    border: 1px solid gray;
+    color: gray;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px 20px 20px 20px;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    width: 115px;
+    text-align: center;
+    font-family: 'Ubuntu';
+}
