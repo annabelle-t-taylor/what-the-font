@@ -22,20 +22,22 @@ const questionOne = new Question(1,'Times New Roman','Verdana','Ubuntu','Frankli
 deckOfQuestions.push(questionOne)
 
 for (let i = 0; i < deckOfQuestions.length; i++){
-    setPage(i)
-    answersEl.addEventListener('click', checkAnswer)
+    setQuestionFont(i)
+    setAnswers(i)
+
+    answersEl.addEventListener('click', function(evt){
+        if (evt.target.tagName === "A")
+            checkAnswer(i)
+        })
+    }
     //check answer
     //update score
     //go onto next question and restart cycle
-}
 
-function checkAnswer(evt){
-    if (evt.target.tagName === "A")
-        console.log("Clicked link!")
+function checkAnswer(i){
+    console.log(deckOfQuestions[i])
 }
-
-function setPage(i){
-    
+function setQuestionFont(i){
     if (deckOfQuestions[i].answer === 1){
         questionString.style.fontFamily = deckOfQuestions[i].font1
     }
@@ -48,7 +50,8 @@ function setPage(i){
     else if (deckOfQuestions[i].answer === 4){
         questionString.style.fontFamily = deckOfQuestions[i].font4
     }
-    console.log(deckOfQuestions[i].answer)
+}
+function setAnswers(i){
     questionNumEl.innerHTML = deckOfQuestions[i].qNum
 
     const ans1 = document.createElement('a')
@@ -68,4 +71,10 @@ function setPage(i){
     answersEl.appendChild(ans4)
 }
 
-//questionNumEl.innerText = questionOne.qNum
+/* 
+function sentenceGenerator(){
+    //generate a line of Lorem Ipsum
+    //assign it to a variable
+    //set questionString.innerText to the value of that variable
+}
+*/
