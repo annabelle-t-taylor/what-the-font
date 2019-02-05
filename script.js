@@ -1,6 +1,7 @@
 const questionNumEl = document.querySelector('.question-num')
 const questionString = document.querySelector('.string')
 const answersEl = document.querySelector('.answers')
+const resetEl = document.querySelector('.reset')
 let scoreEl = document.querySelector('.score-num')
 let score = 0
 const deckOfQuestions = []
@@ -17,36 +18,39 @@ class Question{
 }
 
 
-const questionOne = new Question(1,'Times New Roman','Verdana','Ubuntu','Franklin B Gothic',3)
+const questionOne = new Question(1,'Times New Roman','Verdana','Ubuntu','Franklin B. Gothic',3)
 deckOfQuestions.push(questionOne)
+//const questionTwo = new Question(2,'Courier New','Arial','Comic Sans','Roboto',1)
+//deckOfQuestions.push(questionOne,questionTwo)
 
 for (let i = 0; i < deckOfQuestions.length; i++){
     /*Question: is it better to send in the index to deckOfQuestions, or the object that lies at index i? */
     setQuestionFont(i)
     setAnswers(i)
-
     answersEl.addEventListener('click', function(evt){
         if (evt.target.tagName === "A"){
-           let input = evt.target.dataset.answerNum
+            let input = evt.target
             checkAnswer(i,input)
         }
-        })
-    }
-    //go onto next question and restart cycle
+    })
+}
 
 function checkAnswer(i,userInput){
-    if (deckOfQuestions[i].answer == userInput){
-        console.log("Correct!")
+    if (deckOfQuestions[i].answer == userInput.dataset.answerNum){
+        console.log("Yay!")
         updateScore()
+        userInput.style.backgroundColor = "green"
     }
-    else
-        console.log("Incorrect")
+    else{
+        userInput.style.backgroundColor = "red"
+    }
 }
 
 function updateScore(){
     score+=10
     scoreEl.innerText = score
 }
+
 function setQuestionFont(i){
     if (deckOfQuestions[i].answer === 1){
         questionString.style.fontFamily = deckOfQuestions[i].font1
@@ -84,6 +88,12 @@ function setAnswers(i){
     ans4.dataset.answerNum = '4'
     answersEl.appendChild(ans4)
 }
+
+resetEl.addEventListener('click',function(evt){
+    evt.preventDefault()
+    score = 0
+    scoreEl.innerText = score
+})
 
 /* 
 function sentenceGenerator(){
