@@ -29,3 +29,12 @@ a {
     text-align: center;
     font-family: 'Ubuntu';
 }
+
+/*
+a:hover{
+    lift up a few pixels
+    show shadow underneath
+
+    on un-hover, gently go back to original
+}
+*/
