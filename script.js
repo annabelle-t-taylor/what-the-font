@@ -85,12 +85,16 @@ function checkAnswer(question,userInput){
 }
 
 function showCorrect(correctAnswer){
-    correctAnswer.style.backgroundColor = "lightgreen"
+    correctAnswer.style.backgroundColor = "#D0F0C0"
+    correctAnswer.style.borderColor = "#4F7942"
+    correctAnswer.style.color = "#4F7942"
     resultTextEl.innerText = "Correct!"
 }
 function showIncorrect(userInput){
-    userInput.style.backgroundColor = "lightcoral"
-    resultTextEl.innerHTML = "Sorry, that's incorrect."
+    userInput.style.backgroundColor = "#fa8072"
+    userInput.style.borderColor = "#7c0a02"
+    userInput.style.color = "#7c0a02"
+    resultTextEl.innerHTML = "Sorry, but that's incorrect."
 }
 
 function disableClicks(){
@@ -145,5 +149,7 @@ function resetAnswerGrid(){
     resultBoxEl.style.display = "none"
     for (let i = 0; i < answersEl.childElementCount; i++){
         answersEl.children[i].style.backgroundColor = "white"
+        answersEl.children[i].style.borderColor = "gray"
+        answersEl.children[i].style.color = "gray"
     }
 }
