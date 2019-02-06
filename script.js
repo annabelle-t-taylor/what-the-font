@@ -1,5 +1,6 @@
-
-
+/* To do next: build out the final page (score and play again)
+build out question images (and question objects)
+figure out how to go to two different versions of the deck: serif and sans-serif */
 
 /* DECLARE ALL NECESSARY VARIABLES */
 //Question variables
@@ -64,6 +65,7 @@ nextQuestion.addEventListener('click', goToNextQuestion)
 function presentQuestion(deckQuestion){
     setStringFont(deckQuestion)
     setAnswers(deckQuestion)
+    //checkIfDone(deckQuestion)
 }
 
 function goToNextQuestion(){
@@ -153,3 +155,13 @@ function resetAnswerGrid(){
         answersEl.children[i].style.color = "gray"
     }
 }
+
+// function checkIfDone(question){
+//     if (!deckOfQuestions[question+1])
+//         nextQuestion.innerHTML = "<a href='#' class='reset'>Play again?</a>"
+// }
+
+// const playAgainEl = document.querySelector('a .reset')
+// playAgainEl.addEventListener('click',function(evt){
+//     resetBoard(evt)
+// })
