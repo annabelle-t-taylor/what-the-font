@@ -45,45 +45,53 @@ totalNumOfQuestionsEl.innerText = deckOfQuestions.length
 presentQuestion(deckOfQuestions[0])
 
 //Event listeners
-resetEl.addEventListener('click',function(evt){resetBoard(evt)})
+resetEl.addEventListener('click',function(evt){
+    resetBoard(evt)
+})
 
 answersEl.addEventListener('click', function(evt){
     if (evt.target.tagName === "A")
         checkAnswer(deckOfQuestions[currentQuestion],evt.target)
 })
 
-nextQuestion.addEventListener('click', function(evt){
-    currentQuestion++
-    if (deckOfQuestions[currentQuestion]){
-        presentQuestion(deckOfQuestions[currentQuestion])
-        answersEl.style.pointerEvents = "auto"
-        for (let i = 0; i < answersEl.childElementCount; i++){
-            answersEl.children[i].style.backgroundColor = "white"
-    }
-}
-})
+nextQuestion.addEventListener('click', goToNextQuestion)
+
 
 //Functions
 function presentQuestion(deckQuestion){
     setStringFont(deckQuestion)
     setAnswers(deckQuestion)
-    resultBoxEl.style.display = "none"
+}
+
+function goToNextQuestion(){
+    currentQuestion++
+    if (deckOfQuestions[currentQuestion]){
+        presentQuestion(deckOfQuestions[currentQuestion])
+        resetAnswerGrid()
+    }
 }
 
 function checkAnswer(question,userInput){
-    if (question.answer == userInput.dataset.answerNum){
-        userInput.style.backgroundColor = "lightgreen"
-        resultTextEl.innerText = "Correct!"
-        updateScore()
-    }
-    else{
-        const correctAnswer = document.querySelector(`[data-answer-num='${question.answer}']`)
-        correctAnswer.style.backgroundColor = "lightgreen"
-        userInput.style.backgroundColor = "lightcoral"
-        resultTextEl.innerHTML = "Sorry, that's incorrect."
-    }
+    const correctAnswer = document.querySelector(`[data-answer-num='${question.answer}']`)
+    showCorrect(correctAnswer)
+    if (correctAnswer !== userInput)
+        showIncorrect(userInput)
+    disableClicks()
+}
+
+function showCorrect(correctAnswer){
+    correctAnswer.style.backgroundColor = "lightgreen"
+    resultTextEl.innerText = "Correct!"
+    updateScore()
+}
+function showIncorrect(userInput){
+    userInput.style.backgroundColor = "lightcoral"
+    resultTextEl.innerHTML = "Sorry, that's incorrect."
+}
+
+function disableClicks(){
     resultBoxEl.style.display = "block"
-    answersEl.style.pointerEvents = 'none'
+    answersEl.style.pointerEvents = "none"
 }
 
 function updateScore(){
