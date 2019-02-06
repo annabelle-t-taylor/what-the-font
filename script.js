@@ -1,19 +1,19 @@
-//https://stackoverflow.com/questions/5551378/javascript-pausing-execution-of-function-to-wait-for-user-input reference
-
 const questionNumEl = document.querySelector('.question-num')
 const sampleString = document.querySelector('.string')
-const answersEl = document.querySelector('.answers')
+
 const resetEl = document.querySelector('.reset')
+let scoreEl = document.querySelector('.score-num')
+let score = 0
+
 const resultTextEl = document.querySelector('.result-text')
 const nextQuestion = document.querySelector('.next-question')
-let scoreEl = document.querySelector('.score-num')
 
+const answersEl = document.querySelector('.answers')
 const ans1 = document.querySelector('[data-answer-num^="1"]')
 const ans2 = document.querySelector('[data-answer-num^="2"]')
 const ans3 = document.querySelector('[data-answer-num^="3"]')
 const ans4 = document.querySelector('[data-answer-num^="4"]')
 
-let score = 0
 const deckOfQuestions = []
 
 class Question{
@@ -37,13 +37,17 @@ presentQuestion(deckOfQuestions[0])
 function presentQuestion(deckQuestion){
     setStringFont(deckQuestion)
     setAnswers(deckQuestion)
-    answersEl.addEventListener('click', function(evt){
-        if (evt.target.tagName === "A"){
-            let domInput = evt.target
-            checkAnswer(deckQuestion,domInput)
-        }
-    })
 }
+
+answersEl.addEventListener('click', function(evt){
+    /*Need way of passing what the current question is */
+    if (evt.target.tagName === "A"){
+        let domInput = evt.target
+        checkAnswer(deckOfQuestions[0],domInput)
+    }
+})
+
+resetEl.addEventListener('click',function(evt){resetBoard(evt)})
 
 function checkAnswer(question,userInput){
     if (question.answer == userInput.dataset.answerNum){
@@ -63,9 +67,11 @@ function checkAnswer(question,userInput){
 function updateScore(){
     score+=10
     scoreEl.innerText = score
+    console.log(score)
 }
 
 function setStringFont(question){
+    /*It'd be neat to refactor this so that it just needs one line of code, like settings question.answer equal to a variable and then displaying font[thatvariable] */
     if (question.answer === 1){
         sampleString.style.fontFamily = question.font1
     }
@@ -79,6 +85,7 @@ function setStringFont(question){
         sampleString.style.fontFamily = question.font4
     }
 }
+
 function setAnswers(question){
     questionNumEl.innerHTML = question.qNum
 
@@ -88,8 +95,15 @@ function setAnswers(question){
     ans4.innerText = question.font4
 }
 
-resetEl.addEventListener('click',function(evt){
-    evt.preventDefault()
+nextQuestion.addEventListener('click', function(evt){
+    presentQuestion(deckOfQuestions[1])
+    answersEl.style.pointerEvents = "auto"
+    for (let i = 0; i < answersEl.childElementCount; i++){
+        answersEl.children[i].style.backgroundColor = "white"
+    }
+})
+
+function resetBoard(evt){
     score = 0
     scoreEl.innerText = score
     resultTextEl.innerText = "Result"
@@ -97,13 +111,15 @@ resetEl.addEventListener('click',function(evt){
     for (let i = 0; i < answersEl.childElementCount; i++){
         answersEl.children[i].style.backgroundColor = "white"
     }
-})
+    presentQuestion(deckOfQuestions[0])
+}
 
 
-nextQuestion.addEventListener('click', function(evt){
-    console.log("Next question!")
-    presentQuestion(deckOfQuestions[1])
-})
+
+
+
+
+
 /* 
 function sentenceGenerator(){
     //generate a line of Lorem Ipsum
