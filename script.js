@@ -1,4 +1,5 @@
-const questionNumEl = document.querySelector('.question-num')
+const questionNumEl = document.querySelector('.current-question-num')
+const totalNumOfQuestionsEl = document.querySelector('.total-num-questions')
 const sampleString = document.querySelector('.string')
 
 const resetEl = document.querySelector('.reset')
@@ -7,6 +8,7 @@ let score = 0
 
 const resultTextEl = document.querySelector('.result-text')
 const nextQuestion = document.querySelector('.next-question')
+let currentQuestion = 0
 
 const answersEl = document.querySelector('.answers')
 const ans1 = document.querySelector('[data-answer-num^="1"]')
@@ -15,6 +17,7 @@ const ans3 = document.querySelector('[data-answer-num^="3"]')
 const ans4 = document.querySelector('[data-answer-num^="4"]')
 
 const deckOfQuestions = []
+
 
 class Question{
     constructor(qNum,font1,font2,font3,font4,answer){
@@ -31,6 +34,7 @@ class Question{
 const questionOne = new Question(1,'Times New Roman','Verdana','Ubuntu','Franklin B. Gothic',3)
 const questionTwo = new Question(2,'Courier New','Arial','Comic Sans','Roboto',1)
 deckOfQuestions.push(questionOne,questionTwo)
+totalNumOfQuestionsEl.innerText = deckOfQuestions.length
 
 presentQuestion(deckOfQuestions[0])
 
@@ -41,10 +45,8 @@ function presentQuestion(deckQuestion){
 
 answersEl.addEventListener('click', function(evt){
     /*Need way of passing what the current question is */
-    if (evt.target.tagName === "A"){
-        let domInput = evt.target
-        checkAnswer(deckOfQuestions[0],domInput)
-    }
+    if (evt.target.tagName === "A")
+        checkAnswer(deckOfQuestions[currentQuestion],evt.target)
 })
 
 resetEl.addEventListener('click',function(evt){resetBoard(evt)})
@@ -96,11 +98,14 @@ function setAnswers(question){
 }
 
 nextQuestion.addEventListener('click', function(evt){
-    presentQuestion(deckOfQuestions[1])
-    answersEl.style.pointerEvents = "auto"
-    for (let i = 0; i < answersEl.childElementCount; i++){
-        answersEl.children[i].style.backgroundColor = "white"
+    currentQuestion++
+    if (deckOfQuestions[currentQuestion]){
+        presentQuestion(deckOfQuestions[currentQuestion])
+        answersEl.style.pointerEvents = "auto"
+        for (let i = 0; i < answersEl.childElementCount; i++){
+            answersEl.children[i].style.backgroundColor = "white"
     }
+}
 })
 
 function resetBoard(evt){
@@ -112,6 +117,7 @@ function resetBoard(evt){
         answersEl.children[i].style.backgroundColor = "white"
     }
     presentQuestion(deckOfQuestions[0])
+    currentQuestion = 0
 }
 
 
@@ -120,23 +126,12 @@ function resetBoard(evt){
 
 
 
-/* 
-function sentenceGenerator(){
+// found this fun little node package: http://kylestetz.github.io/Sentencer/
+//if I have time, I'd love to get some help implementing this.
+/*function sentenceGenerator(){
+    var Sentencer = require('sentencer');
+    Sentencer.make("This sentence has {{ a_noun }} and {{ an_adjective }} {{ noun }} in it.");
     //generate a line of Lorem Ipsum
     //assign it to a variable
     //set sampleString.innerText to the value of that variable
-}
-*/
-
-//resumeGame function calls these other functions on the next element in deckOfQuestions
-// for (let i = 0; i < deckOfQuestions.length; i++){
-//     /*Question: is it better to send in the index to deckOfQuestions, or the object that lies at index i? */
-//     setQuestionFont(i)
-//     setAnswers(i)
-//     answersEl.addEventListener('click', function(evt){
-//         if (evt.target.tagName === "A"){
-//             let input = evt.target
-//             checkAnswer(i,input)
-//         }
-//     })
-// }
+}*/
