@@ -89,22 +89,21 @@ function checkAnswer(question,userInput){
 function updateScore(){
     score+=10
     scoreEl.innerText = score
-    console.log(score)
 }
 
 function setStringFont(question){
-    /*It'd be neat to refactor this so that it just needs one line of code, like settings question.answer equal to a variable and then displaying font[thatvariable] */
-    if (question.answer === 1){
-        sampleString.style.fontFamily = question.font1
-    }
-    else if (question.answer === 2){
-        sampleString.style.fontFamily = question.font2
-    }
-    else if (question.answer === 3){
-        sampleString.style.fontFamily = question.font3
-    }
-    else if (question.answer === 4){
-        sampleString.style.fontFamily = question.font4
+    switch(question.answer){
+        case 1:
+            sampleString.style.fontFamily = question.font1
+            break
+        case 2:
+            sampleString.style.fontFamily = question.font2
+            break
+        case 3:
+            sampleString.style.fontFamily = question.font3
+            break        
+        case 4:
+            sampleString.style.fontFamily = question.font4
     }
 }
 
@@ -117,21 +116,25 @@ function setAnswers(question){
     ans4.innerText = question.font4
 }
 
-
 function resetBoard(evt){
+    resetScore()
+    resetAnswerGrid()
+    presentQuestion(deckOfQuestions[0])
+    currentQuestion = 0
+}
+
+function resetScore(){
     score = 0
     scoreEl.innerText = score
-    resultTextEl.innerText = "Result"
+}
+
+function resetAnswerGrid(){
     answersEl.style.pointerEvents = "auto"
     resultBoxEl.style.display = "none"
     for (let i = 0; i < answersEl.childElementCount; i++){
         answersEl.children[i].style.backgroundColor = "white"
     }
-    presentQuestion(deckOfQuestions[0])
-    currentQuestion = 0
 }
-
-
 
 
 
