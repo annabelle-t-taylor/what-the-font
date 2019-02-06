@@ -76,13 +76,14 @@ function checkAnswer(question,userInput){
     showCorrect(correctAnswer)
     if (correctAnswer !== userInput)
         showIncorrect(userInput)
+    else   
+        updateScore()
     disableClicks()
 }
 
 function showCorrect(correctAnswer){
     correctAnswer.style.backgroundColor = "lightgreen"
     resultTextEl.innerText = "Correct!"
-    updateScore()
 }
 function showIncorrect(userInput){
     userInput.style.backgroundColor = "lightcoral"
