@@ -76,13 +76,16 @@ aside a{
     font-family: 'Ubuntu';
 }
 
-/*To do: have result box not appear initially, then appear with the correct values after the user submits input*/
-
+.result-wrapper{
+    height: 40px;
+}
 .result-box{
     font-family: 'Ubuntu';
     font-size: 20px;
-    height: 20px;
+
     margin-top: 20px;
+    text-align: center;
+    display: none;
 }
 
 .result a{

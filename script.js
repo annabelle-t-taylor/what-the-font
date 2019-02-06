@@ -1,23 +1,27 @@
+/* DECLARE ALL NECESSARY VARIABLES */
+//Question variables
 const questionNumEl = document.querySelector('.current-question-num')
 const totalNumOfQuestionsEl = document.querySelector('.total-num-questions')
 const sampleString = document.querySelector('.string')
+const deckOfQuestions = []
 
+//Header variables
 const resetEl = document.querySelector('.reset')
 let scoreEl = document.querySelector('.score-num')
 let score = 0
 
+//Result/next question variables
+const resultBoxEl = document.querySelector('.result-box')
 const resultTextEl = document.querySelector('.result-text')
 const nextQuestion = document.querySelector('.next-question')
 let currentQuestion = 0
 
+//Answer variables
 const answersEl = document.querySelector('.answers')
 const ans1 = document.querySelector('[data-answer-num^="1"]')
 const ans2 = document.querySelector('[data-answer-num^="2"]')
 const ans3 = document.querySelector('[data-answer-num^="3"]')
 const ans4 = document.querySelector('[data-answer-num^="4"]')
-
-const deckOfQuestions = []
-
 
 class Question{
     constructor(qNum,font1,font2,font3,font4,answer){
@@ -30,26 +34,41 @@ class Question{
     }
 }
 
-
+//Set up game
 const questionOne = new Question(1,'Times New Roman','Verdana','Ubuntu','Franklin B. Gothic',3)
 const questionTwo = new Question(2,'Courier New','Arial','Comic Sans','Roboto',1)
-deckOfQuestions.push(questionOne,questionTwo)
+const questionThree = new Question(3,'Gotham','Papyrus','Didot','Futura',2)
+
+deckOfQuestions.push(questionOne,questionTwo,questionThree)
 totalNumOfQuestionsEl.innerText = deckOfQuestions.length
 
 presentQuestion(deckOfQuestions[0])
 
-function presentQuestion(deckQuestion){
-    setStringFont(deckQuestion)
-    setAnswers(deckQuestion)
-}
+//Event listeners
+resetEl.addEventListener('click',function(evt){resetBoard(evt)})
 
 answersEl.addEventListener('click', function(evt){
-    /*Need way of passing what the current question is */
     if (evt.target.tagName === "A")
         checkAnswer(deckOfQuestions[currentQuestion],evt.target)
 })
 
-resetEl.addEventListener('click',function(evt){resetBoard(evt)})
+nextQuestion.addEventListener('click', function(evt){
+    currentQuestion++
+    if (deckOfQuestions[currentQuestion]){
+        presentQuestion(deckOfQuestions[currentQuestion])
+        answersEl.style.pointerEvents = "auto"
+        for (let i = 0; i < answersEl.childElementCount; i++){
+            answersEl.children[i].style.backgroundColor = "white"
+    }
+}
+})
+
+//Functions
+function presentQuestion(deckQuestion){
+    setStringFont(deckQuestion)
+    setAnswers(deckQuestion)
+    resultBoxEl.style.display = "none"
+}
 
 function checkAnswer(question,userInput){
     if (question.answer == userInput.dataset.answerNum){
@@ -63,6 +82,7 @@ function checkAnswer(question,userInput){
         userInput.style.backgroundColor = "lightcoral"
         resultTextEl.innerHTML = "Sorry, that's incorrect."
     }
+    resultBoxEl.style.display = "block"
     answersEl.style.pointerEvents = 'none'
 }
 
@@ -97,22 +117,13 @@ function setAnswers(question){
     ans4.innerText = question.font4
 }
 
-nextQuestion.addEventListener('click', function(evt){
-    currentQuestion++
-    if (deckOfQuestions[currentQuestion]){
-        presentQuestion(deckOfQuestions[currentQuestion])
-        answersEl.style.pointerEvents = "auto"
-        for (let i = 0; i < answersEl.childElementCount; i++){
-            answersEl.children[i].style.backgroundColor = "white"
-    }
-}
-})
 
 function resetBoard(evt){
     score = 0
     scoreEl.innerText = score
     resultTextEl.innerText = "Result"
     answersEl.style.pointerEvents = "auto"
+    resultBoxEl.style.display = "none"
     for (let i = 0; i < answersEl.childElementCount; i++){
         answersEl.children[i].style.backgroundColor = "white"
     }
