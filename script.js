@@ -50,6 +50,7 @@ function checkAnswer(question,userInput){
         userInput.style.backgroundColor = "lightcoral"
         resultEl.innerText = "Sorry, that's incorrect. Onto the next question."
     }
+    answersEl.style.pointerEvents = 'none'
 }
 
 function updateScore(){
@@ -100,6 +101,10 @@ resetEl.addEventListener('click',function(evt){
     score = 0
     scoreEl.innerText = score
     resultEl.innerText = ""
+    answersEl.style.pointerEvents = "auto"
+    for (let i = 0; i < answersEl.childElementCount; i++){
+        answersEl.children[i].style.backgroundColor = "white"
+    }
 })
 
 /* 
