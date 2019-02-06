@@ -1,19 +1,20 @@
 body{
-    display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    align-content: center;
     justify-content: space-between
 }
 
-aside{
+header{
     display: flex;
     flex-direction: row-reverse;
     text-align: right;
+    animation: none;
+    width: 100%;
 }
 
-aside > div{
-    margin: 20px;
+header > *{
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px;
 }
 
 main{
@@ -29,43 +30,6 @@ main{
     margin: 20px;
 }
 
-.answers{
-    display: grid;
-    grid-template-rows: repeat(2,1fr);
-    grid-template-columns: repeat(2,1fr);
-}
-
-footer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-
-}
-
-aside, footer{
-    font-size: 20px;
-    font-family: 'Ubuntu';
-}
-aside a{
-    text-decoration: none;
-}
-.answers a {
-    text-decoration: none;
-    border: 1px solid gray;
-    color: gray;
-    font-weight: bold;
-    font-size: 20px;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 5px;
-    display: inline-block;
-    width: 200px;
-    text-align: center;
-    font-family: 'Ubuntu';
-}
-
 .string{
     font-size: 50px;
     margin-bottom: 10px;
@@ -75,14 +39,23 @@ aside a{
     font-size: 20px;
     font-family: 'Ubuntu';
 }
+.answers{
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    grid-template-columns: repeat(2,1fr);
+}
+
+.answers a {
+    width: 200px;
+}
 
 .result-wrapper{
     height: 40px;
 }
+
 .result-box{
     font-family: 'Ubuntu';
     font-size: 20px;
-
     margin-top: 20px;
     text-align: center;
     display: none;
@@ -90,4 +63,14 @@ aside a{
 
 .result a{
     text-decoration: none;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    font-size: 20px;
+    font-family: 'Ubuntu';
 }

@@ -1,3 +1,6 @@
+
+
+
 /* DECLARE ALL NECESSARY VARIABLES */
 //Question variables
 const questionNumEl = document.querySelector('.current-question-num')
@@ -144,17 +147,3 @@ function resetAnswerGrid(){
         answersEl.children[i].style.backgroundColor = "white"
     }
 }
-
-
-
-
-
-// found this fun little node package: http://kylestetz.github.io/Sentencer/
-//if I have time, I'd love to get some help implementing this.
-/*function sentenceGenerator(){
-    var Sentencer = require('sentencer');
-    Sentencer.make("This sentence has {{ a_noun }} and {{ an_adjective }} {{ noun }} in it.");
-    //generate a line of Lorem Ipsum
-    //assign it to a variable
-    //set sampleString.innerText to the value of that variable
-}*/

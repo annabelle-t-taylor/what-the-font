@@ -1,0 +1,23 @@
+Serif
+Burgess
+Adelle
+Cooper BT
+GT Super
+Modern Self
+Pitch
+Courier New
+Garamond
+Times New Roman
+Stanley
+
+Sans Serif
+Ubuntu
+Cotoris
+Univers
+Comic Sans
+Verdana
+Roboto
+Franklin Gothic
+Futura
+Avenir
+Arial

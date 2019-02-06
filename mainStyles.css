@@ -1,15 +1,16 @@
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    flex-direction: column;
 }
 
 header{
     text-align: center;
     animation: fadeIn 2s;
 }
+
 h1{
     font-size: 60px;
 }
@@ -25,7 +26,23 @@ h2{
     font-family: 'Damion', cursive;
 }
 
-a {
+article{
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #333;
+    animation: fadeIn 4s;
+}
+
+nav{
+    animation: fadeIn 5s;
+}
+
+nav a:hover, .answers a:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 5px 7px;
+}
+
+nav a, .answers a {
     text-decoration: none;
     border: 1px solid gray;
     color: gray;
@@ -39,21 +56,6 @@ a {
     text-align: center;
     font-family: 'Ubuntu';
     transition: transform .5s ease;
-}
-article{
-    font-size: 35px;
-    margin-bottom: 20px;
-    color: #333;
-    animation: fadeIn 4s;
-}
-
-a:hover{
-    transform: translateY(-10px);
-    box-shadow: 0 5px 7px;
-}
-
-nav{
-    animation: fadeIn 5s;
 }
 
 @keyframes fadeIn {
