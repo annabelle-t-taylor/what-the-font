@@ -19,7 +19,7 @@ const deckOfQuestions = []
 //Header variables
 const resetEl = document.querySelector('.reset')
 const finalScoreEl = document.querySelector('.final-score')
-let scoreEl = document.querySelector('.score-num')
+const scoreEl = document.querySelector('.score-num')
 let score = 0
 
 //Results and next question variables
@@ -66,26 +66,12 @@ sansSerifGameEl.addEventListener('click', startSansSerifGame)
 
 serifGameEl.addEventListener('click', startSerifGame)
 
-function startSansSerifGame(){
-    localStorage.setItem('gameversion','Sans-Serif')
-    resetBoard()
-    deckOfQuestions.length = 0
-    startGame(localStorage.getItem('gameversion'))
-}
-
-function startSerifGame(){
-    localStorage.setItem('gameversion','Serif')
-    resetBoard()
-    deckOfQuestions.length = 0
-    startGame(localStorage.getItem('gameversion'))
-}
-
 /* FUNCTIONS */
 function startGame(version){
     if (version === 'Serif')
-        buildSerifGame()
+        buildSerifDeck()
     else if (version === 'Sans-Serif')
-        buildSansSerifGame()
+        buildSansSerifDeck()
     totalNumOfQuestionsEl.innerText = deckOfQuestions.length
     presentQuestion(deckOfQuestions[0])
 }
@@ -190,7 +176,7 @@ function resetAnswerGrid(){
     }
 }
 
-function buildSerifGame(){
+function buildSerifDeck(){
     const q1 = new Question(1,'Garamond','Libre Baskerville','Droid Serif Pro','Sabon',2,"assets/seriffont1.png")
     const q2 = new Question(2,'Playfair Display','Bodini','Arno Pro','Georgia',1,"assets/seriffont2.png")
     const q3 = new Question(3,'Bookman Old Style','Palatino','Stempel Schneidler','Source Serif Pro',4,"assets/seriffont3.png")
@@ -205,7 +191,7 @@ function buildSerifGame(){
     return deckOfQuestions   
 }
 
-function buildSansSerifGame(){
+function buildSansSerifDeck(){
     const q1 = new Question(1,'Arial','Verdana','Ubuntu','Comic Sans',3,"assets/sansfont1.png")
     const q2 = new Question(2,'Open Sans','Arial','Lato','Roboto',4,"assets/sansfont2.png")
     const q3 = new Question(3,'Simplifica','Cooper Hewitt','Modern Sans Light','Mohave',2,'assets/sansfont3.png')
@@ -218,4 +204,18 @@ function buildSansSerifGame(){
     const q10 = new Question(10, 'Nunito Sans Regular','Nunito Light','Nunito','Nunito Sans Black',3,'assets/sansfont10.png')
     deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return deckOfQuestions
+}
+
+function startSansSerifGame(){
+    localStorage.setItem('gameversion','Sans-Serif')
+    resetBoard()
+    deckOfQuestions.length = 0
+    startGame(localStorage.getItem('gameversion'))
+}
+
+function startSerifGame(){
+    localStorage.setItem('gameversion','Serif')
+    resetBoard()
+    deckOfQuestions.length = 0
+    startGame(localStorage.getItem('gameversion'))
 }
