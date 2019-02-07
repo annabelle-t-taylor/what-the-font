@@ -2,7 +2,7 @@
 //thanks to the following for helping me generate the sample sentences
 /*https://forums.appleinsider.com/discussion/57707/a-better-font-sentence*/
 
-/* DECLARE ALL NECESSARY VARIABLES */
+/* VARIABLES */
 //Game variables
 const gameBoardEl = document.querySelector('.game-board')
 const finishGameEl = document.querySelector('.game-over')
@@ -68,8 +68,6 @@ serifGameEl.addEventListener('click', startSerifGame)
 
 function startSansSerifGame(){
     localStorage.setItem('gameversion','Sans-Serif')
-    gameBoardEl.style.display = "block"
-    finishGameEl.style.display = "none"
     resetBoard()
     deckOfQuestions.length = 0
     startGame(localStorage.getItem('gameversion'))
@@ -77,8 +75,6 @@ function startSansSerifGame(){
 
 function startSerifGame(){
     localStorage.setItem('gameversion','Serif')
-    gameBoardEl.style.display = "block"
-    finishGameEl.style.display = "none"
     resetBoard()
     deckOfQuestions.length = 0
     startGame(localStorage.getItem('gameversion'))
@@ -120,7 +116,7 @@ function checkAnswer(question,userInput){
 
 function checkIfDone(question){
     if (!deckOfQuestions[question.qNum]){
-        nextQuestionEl.innerText = "Finish game"
+        nextQuestionEl.innerText = "Finish game!"
         nextQuestionEl.removeEventListener('click', goToNextQuestion)
         nextQuestionEl.addEventListener('click',showEndGameBoard)
     }
@@ -168,10 +164,15 @@ function setAnswers(question){
 }
 
 function resetBoard(){
+    gameBoardEl.style.display = "flex"
+    finishGameEl.style.display = "none"
     resetScore()
     resetAnswerGrid()
     presentQuestion(deckOfQuestions[0])
     currentQuestion = 0
+    nextQuestionEl.innerText = "Next question"
+    nextQuestionEl.removeEventListener('click', showEndGameBoard)
+    nextQuestionEl.addEventListener('click', goToNextQuestion)
 }
 
 function resetScore(){
