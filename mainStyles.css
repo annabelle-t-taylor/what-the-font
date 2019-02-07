@@ -91,3 +91,10 @@ nav a, .answers a {
     }
 
 } 
+
+@media (prefers-reduced-motion: reduce) {
+    .animation {
+      animation: none;
+      -webkit-animation: none;
+    }
+  }
