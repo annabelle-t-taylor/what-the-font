@@ -95,6 +95,13 @@ main{
     color: purple;
 }
 
+.game-over{
+    display: none;
+    position: absolute;
+    background: white;
+    box-shadow: 5px 5px 5px gray;
+    z-index: 1;
+}
 footer{
     display: flex;
     flex-direction: column;

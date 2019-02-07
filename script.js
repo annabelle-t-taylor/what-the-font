@@ -6,8 +6,13 @@ add accessibility button to remove animations*/
 /*https://forums.appleinsider.com/discussion/57707/a-better-font-sentence*/
 
 /* DECLARE ALL NECESSARY VARIABLES */
+//Game variables
+const gameVersion = localStorage.getItem("gameversion")
+const gameOverEl = document.querySelector('.game-over')
+const gameBoardEl = document.querySelector('.game-board')
+
 //Question variables
-const gameVersion = localStorage.getItem("gameversion");
+const questionEl = document.querySelector('.question')
 const questionNumEl = document.querySelector('.current-question-num')
 const totalNumOfQuestionsEl = document.querySelector('.total-num-questions')
 const sampleString = document.querySelector('.string')
@@ -62,6 +67,21 @@ nextQuestion.addEventListener('click', goToNextQuestion)
 
 //Functions
 
+function checkIfDone(question){
+    if (!deckOfQuestions[question.qNum]){
+        nextQuestion.innerText = "Finish"
+        nextQuestion.removeEventListener('click', goToNextQuestion)
+        nextQuestion.addEventListener('click', showEndScreen)
+    }
+}
+
+function showEndScreen(){
+    questionEl.style.opacity = "0.5"
+    answersEl.style.opacity = "0.5"
+    resultBoxEl.style.opacity = "0.5"
+    gameOverEl.style.display = "inline-block"
+}
+
 function startGame(localStorageEl){
     if (localStorageEl === 'serif')
         buildSerifGame()
@@ -74,7 +94,6 @@ function startGame(localStorageEl){
 function presentQuestion(deckQuestion){
     setStringFont(deckQuestion)
     setAnswers(deckQuestion)
-    //checkIfDone(deckQuestion)
 }
 
 function goToNextQuestion(){
@@ -93,6 +112,7 @@ function checkAnswer(question,userInput){
     else   
         updateScore()
     disableClicks()
+    checkIfDone(question)
 }
 
 function showCorrect(correctAnswer){
@@ -183,10 +203,6 @@ function buildSansSerifGame(){
     deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return deckOfQuestions
 }
-// function checkIfDone(question){
-//     if (!deckOfQuestions[question+1])
-//         nextQuestion.innerHTML = "<a href='#' class='reset'>Play again?</a>"
-// }
 
 // const playAgainEl = document.querySelector('a .reset')
 // playAgainEl.addEventListener('click',function(evt){
