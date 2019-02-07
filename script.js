@@ -1,4 +1,4 @@
-/* To do next: build out the final page (score and play again)
+/*
 build out question images (and question objects)
 add accessibility button to remove animations*/
 
@@ -8,14 +8,11 @@ add accessibility button to remove animations*/
 /* DECLARE ALL NECESSARY VARIABLES */
 //Game variables
 const gameVersion = localStorage.getItem("gameversion")
-const gameOverEl = document.querySelector('.game-over')
-const gameBoardEl = document.querySelector('.game-board')
 
 //Question variables
-const questionEl = document.querySelector('.question')
 const questionNumEl = document.querySelector('.current-question-num')
 const totalNumOfQuestionsEl = document.querySelector('.total-num-questions')
-const sampleString = document.querySelector('.string')
+const sentenceEl = document.querySelector('.sentence')
 const deckOfQuestions = []
 
 //Header variables
@@ -26,15 +23,15 @@ let score = 0
 //Result/next question variables
 const resultBoxEl = document.querySelector('.result-box')
 const resultTextEl = document.querySelector('.result-text')
-const nextQuestion = document.querySelector('.next-question')
+const nextQuestionEl = document.querySelector('.next-question')
 let currentQuestion = 0
 
 //Answer variables
 const answersEl = document.querySelector('.answers')
-const ans1 = document.querySelector('[data-answer-num^="1"]')
-const ans2 = document.querySelector('[data-answer-num^="2"]')
-const ans3 = document.querySelector('[data-answer-num^="3"]')
-const ans4 = document.querySelector('[data-answer-num^="4"]')
+const ans1El = document.querySelector('[data-answer-num^="1"]')
+const ans2El = document.querySelector('[data-answer-num^="2"]')
+const ans3El = document.querySelector('[data-answer-num^="3"]')
+const ans4El = document.querySelector('[data-answer-num^="4"]')
 
 class Question{
     constructor(qNum,font1,font2,font3,font4,answer,image){
@@ -62,26 +59,10 @@ answersEl.addEventListener('click', function(evt){
         checkAnswer(deckOfQuestions[currentQuestion],evt.target)
 })
 
-nextQuestion.addEventListener('click', goToNextQuestion)
+nextQuestionEl.addEventListener('click', goTonextQuestion)
 
 
 //Functions
-
-function checkIfDone(question){
-    if (!deckOfQuestions[question.qNum]){
-        nextQuestion.innerText = "Finish"
-        nextQuestion.removeEventListener('click', goToNextQuestion)
-        nextQuestion.addEventListener('click', showEndScreen)
-    }
-}
-
-function showEndScreen(){
-    questionEl.style.opacity = "0.5"
-    answersEl.style.opacity = "0.5"
-    resultBoxEl.style.opacity = "0.5"
-    gameOverEl.style.display = "inline-block"
-}
-
 function startGame(localStorageEl){
     if (localStorageEl === 'serif')
         buildSerifGame()
@@ -96,7 +77,7 @@ function presentQuestion(deckQuestion){
     setAnswers(deckQuestion)
 }
 
-function goToNextQuestion(){
+function goTonextQuestion(){
     currentQuestion++
     if (deckOfQuestions[currentQuestion]){
         presentQuestion(deckOfQuestions[currentQuestion])
@@ -113,6 +94,13 @@ function checkAnswer(question,userInput){
         updateScore()
     disableClicks()
     checkIfDone(question)
+}
+
+function checkIfDone(question){
+    if (!deckOfQuestions[question.qNum]){
+        nextQuestionEl.innerHTML = "<a href='index.html'>Start over?</a>"
+        nextQuestionEl.removeEventListener('click', goTonextQuestion)
+    }
 }
 
 function showCorrect(correctAnswer){
@@ -138,16 +126,16 @@ function updateScore(){
     scoreEl.innerText = score
 }
 function setStringFont(question){
-    sampleString.setAttribute("src",question.image)
+    sentenceEl.setAttribute("src",question.image)
 }
 
 function setAnswers(question){
     questionNumEl.innerHTML = question.qNum
 
-    ans1.innerText = question.font1
-    ans2.innerText = question.font2
-    ans3.innerText = question.font3
-    ans4.innerText = question.font4
+    ans1El.innerText = question.font1
+    ans2El.innerText = question.font2
+    ans3El.innerText = question.font3
+    ans4El.innerText = question.font4
 }
 
 function resetBoard(evt){
@@ -173,7 +161,6 @@ function resetAnswerGrid(){
 }
 
 function buildSerifGame(){
-    console.log("It's serif again!")
     const q1 = new Question(1,'Font1','Libre Baskerville','Font3','Font4',2,"assets/seriffont1.png")
     const q2 = new Question(2,'Playfair Display','Font2','Font3','Font4',1,"assets/seriffont2.png")
     const q3 = new Question(3,'Font1','Font2','Font3','Source Serif Pro',4,"assets/seriffont3.png")
@@ -189,7 +176,6 @@ function buildSerifGame(){
 }
 
 function buildSansSerifGame(){
-    console.log("It's sans serif again!!")
     const q1 = new Question(1,'Arial','Verdana','Ubuntu','Comic Sans',3,"assets/sansfont1.png")
     const q2 = new Question(2,'Open Sans','Arial','Lato','Roboto',4,"assets/sansfont2.png")
     const q3 = new Question(3,'Font1','Cooper Hewitt','Font3','Font4',2,'assets/sansfont3.png')
@@ -203,8 +189,3 @@ function buildSansSerifGame(){
     deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return deckOfQuestions
 }
-
-// const playAgainEl = document.querySelector('a .reset')
-// playAgainEl.addEventListener('click',function(evt){
-//     resetBoard(evt)
-// })

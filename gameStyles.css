@@ -1,7 +1,6 @@
 body{
     flex-direction: column;
     justify-content: space-between;
-    align-items: space-around;
     animation: pageFadeIn 2s;
 }
 
@@ -46,6 +45,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .question{
@@ -55,7 +55,7 @@ main{
     margin: 20px;
 }
 
-.string{
+.sentence{
     max-width: 650px;
 }
 
@@ -95,13 +95,6 @@ main{
     color: purple;
 }
 
-.game-over{
-    display: none;
-    position: absolute;
-    background: white;
-    box-shadow: 5px 5px 5px gray;
-    z-index: 1;
-}
 footer{
     display: flex;
     flex-direction: column;
