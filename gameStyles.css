@@ -71,7 +71,11 @@ main{
 }
 
 .answers a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 200px;
+    height: 40px;
 }
 
 .result-wrapper{
