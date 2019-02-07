@@ -1,9 +1,5 @@
-const test = localStorage.getItem("lastname");
-console.log(test)
-
 /* To do next: build out the final page (score and play again)
 build out question images (and question objects)
-figure out how to go to two different versions of the deck: serif and sans-serif
 add accessibility button to remove animations*/
 
 //thanks to the following for helping me generate the sample sentences
@@ -11,6 +7,7 @@ add accessibility button to remove animations*/
 
 /* DECLARE ALL NECESSARY VARIABLES */
 //Question variables
+const gameVersion = localStorage.getItem("gameversion");
 const questionNumEl = document.querySelector('.current-question-num')
 const totalNumOfQuestionsEl = document.querySelector('.total-num-questions')
 const sampleString = document.querySelector('.string')
@@ -48,25 +45,7 @@ class Question{
 
 //Set up game
 
-//Sans serif fonts
-const q1 = new Question(1,'Arial','Verdana','Ubuntu','Comic Sans',3,"assets/sansfont1.png")
-const q2 = new Question(2,'Open Sans','Arial','Lato','Roboto',4,"assets/sansfont2.png")
-const q3 = new Question(3,'Font1','Cooper Hewitt','Font3','Font4',2,'assets/sansfont3.png')
-const q4 = new Question(4, 'Font1','Font2','Raleway','font4',3,'assets/sansfont4.png')
-const q5 = new Question(5, 'Antic','Font2','Font3','Font4',1,'assets/sansfont5.png')
-const q6 = new Question(6, 'Font1','Lato','Font3','Font4',2,'assets/sansfont6.png')
-const q7 = new Question(7, 'Font1','Font2','Font3','Gidole',4,'assets/sansfont7.png')
-const q8 = new Question(8, 'Font1','Font2','Helveticish','Font4',3,'assets/sansfont8.png')
-const q9 = new Question(9, 'Monserrat','Font2','Font3','Font4',1,'assets/sansfont9.png')
-const q10 = new Question(10, 'Font1','Font2','Nunito','Font4',3,'assets/sansfont10.png')
-
-//Serif fonts
-
-
-deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
-totalNumOfQuestionsEl.innerText = deckOfQuestions.length
-
-presentQuestion(deckOfQuestions[0])
+startGame(gameVersion)
 
 //Event listeners
 resetEl.addEventListener('click',function(evt){
@@ -82,6 +61,16 @@ nextQuestion.addEventListener('click', goToNextQuestion)
 
 
 //Functions
+
+function startGame(localStorageEl){
+    if (localStorageEl === 'serif')
+        buildSerifGame()
+    else if (localStorageEl === 'sans-serif')
+        buildSansSerifGame()
+    totalNumOfQuestionsEl.innerText = deckOfQuestions.length
+    presentQuestion(deckOfQuestions[0])
+}
+
 function presentQuestion(deckQuestion){
     setStringFont(deckQuestion)
     setAnswers(deckQuestion)
@@ -131,21 +120,6 @@ function updateScore(){
 function setStringFont(question){
     sampleString.setAttribute("src",question.image)
 }
-// function setStringFont(question){
-//     switch(question.answer){
-//         case 1:
-//             sampleString.style.fontFamily = question.font1
-//             break
-//         case 2:
-//             sampleString.style.fontFamily = question.font2
-//             break
-//         case 3:
-//             sampleString.style.fontFamily = question.font3
-//             break        
-//         case 4:
-//             sampleString.style.fontFamily = question.font4
-//     }
-// }
 
 function setAnswers(question){
     questionNumEl.innerHTML = question.qNum
@@ -178,6 +152,37 @@ function resetAnswerGrid(){
     }
 }
 
+function buildSerifGame(){
+    console.log("It's serif again!")
+    const q1 = new Question(1,'Font1','Libre Baskerville','Font3','Font4',2,"assets/seriffont1.png")
+    const q2 = new Question(2,'Playfair Display','Font2','Font3','Font4',1,"assets/seriffont2.png")
+    const q3 = new Question(3,'Font1','Font2','Font3','Source Serif Pro',4,"assets/seriffont3.png")
+    const q4 = new Question(4,'Font1','Merriweather','Font3','Font4',2,"assets/seriffont4.png")
+    const q5 = new Question(5,'Font1','Font2','Forum','Font4',3,"assets/seriffont5.png")
+    const q6 = new Question(6,'Yesiva One','Font2','Font3','Font4',1,"assets/seriffont6.png")
+    const q7 = new Question(7,'Font1','Font2','Font3','Luthier',4,"assets/seriffont7.png")
+    const q8 = new Question(8,'Font1','Font2','Anaktoria','Font4',3,"assets/seriffont8.png")
+    const q9 = new Question(9,'Kumar One','Kumar Two','Kumar Three','Kumar Four',1,"assets/seriffont9.png")
+    const q10 = new Question(10,'Font1','Font2','Noto Serif Display Medium','Font4',3,"assets/seriffont10.png")
+    deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
+    return deckOfQuestions   
+}
+
+function buildSansSerifGame(){
+    console.log("It's sans serif again!!")
+    const q1 = new Question(1,'Arial','Verdana','Ubuntu','Comic Sans',3,"assets/sansfont1.png")
+    const q2 = new Question(2,'Open Sans','Arial','Lato','Roboto',4,"assets/sansfont2.png")
+    const q3 = new Question(3,'Font1','Cooper Hewitt','Font3','Font4',2,'assets/sansfont3.png')
+    const q4 = new Question(4, 'Font1','Font2','Raleway','font4',3,'assets/sansfont4.png')
+    const q5 = new Question(5, 'Antic','Font2','Font3','Font4',1,'assets/sansfont5.png')
+    const q6 = new Question(6, 'Font1','Lato','Font3','Font4',2,'assets/sansfont6.png')
+    const q7 = new Question(7, 'Font1','Font2','Font3','Gidole',4,'assets/sansfont7.png')
+    const q8 = new Question(8, 'Font1','Font2','Helveticish','Font4',3,'assets/sansfont8.png')
+    const q9 = new Question(9, 'Monserrat','Font2','Font3','Font4',1,'assets/sansfont9.png')
+    const q10 = new Question(10, 'Font1','Font2','Nunito','Font4',3,'assets/sansfont10.png')
+    deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
+    return deckOfQuestions
+}
 // function checkIfDone(question){
 //     if (!deckOfQuestions[question+1])
 //         nextQuestion.innerHTML = "<a href='#' class='reset'>Play again?</a>"
