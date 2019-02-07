@@ -68,6 +68,7 @@ main{
     display: grid;
     grid-template-rows: repeat(2,1fr);
     grid-template-columns: repeat(2,1fr);
+    margin-bottom: 0;
 }
 
 .answers a {
@@ -104,6 +105,33 @@ footer{
     font-size: 20px;
     font-family: 'Ubuntu';
 }
+
+.game-over{
+    display: none;
+    text-align: center;
+    color:  #8d021f;
+}
+
+.final-score{
+    font-weight: bold;
+}
+
+.game-over nav{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.game-over a{
+    width: 115px;
+}
+
+.replay-prompt{
+    font-family: 'Ubuntu';
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
 
 @keyframes pageFadeIn{
     from {

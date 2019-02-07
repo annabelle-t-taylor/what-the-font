@@ -1,12 +1,13 @@
-/*
-build out question images (and question objects)
-add accessibility button to remove animations*/
 
 //thanks to the following for helping me generate the sample sentences
 /*https://forums.appleinsider.com/discussion/57707/a-better-font-sentence*/
 
 /* DECLARE ALL NECESSARY VARIABLES */
 //Game variables
+const gameBoardEl = document.querySelector('.game-board')
+const finishGameEl = document.querySelector('.game-over')
+const serifGameEl = document.querySelector('.serif-version')
+const sansSerifGameEl = document.querySelector('.sans-serif-version')
 const gameVersion = localStorage.getItem("gameversion")
 
 //Question variables
@@ -17,10 +18,11 @@ const deckOfQuestions = []
 
 //Header variables
 const resetEl = document.querySelector('.reset')
+const finalScoreEl = document.querySelector('.final-score')
 let scoreEl = document.querySelector('.score-num')
 let score = 0
 
-//Result/next question variables
+//Results and next question variables
 const resultBoxEl = document.querySelector('.result-box')
 const resultTextEl = document.querySelector('.result-text')
 const nextQuestionEl = document.querySelector('.next-question')
@@ -45,13 +47,12 @@ class Question{
     }
 }
 
-//Set up game
-
+/* BEGIN GAME */
 startGame(gameVersion)
 
-//Event listeners
+/* EVENT LISTENERS */
 resetEl.addEventListener('click',function(evt){
-    resetBoard(evt)
+    resetBoard()
 })
 
 answersEl.addEventListener('click', function(evt){
@@ -59,14 +60,35 @@ answersEl.addEventListener('click', function(evt){
         checkAnswer(deckOfQuestions[currentQuestion],evt.target)
 })
 
-nextQuestionEl.addEventListener('click', goTonextQuestion)
+nextQuestionEl.addEventListener('click', goToNextQuestion)
 
+sansSerifGameEl.addEventListener('click', startSansSerifGame)
 
-//Functions
-function startGame(localStorageEl){
-    if (localStorageEl === 'serif')
+serifGameEl.addEventListener('click', startSerifGame)
+
+function startSansSerifGame(){
+    localStorage.setItem('gameversion','Sans-Serif')
+    gameBoardEl.style.display = "block"
+    finishGameEl.style.display = "none"
+    resetBoard()
+    deckOfQuestions.length = 0
+    startGame(localStorage.getItem('gameversion'))
+}
+
+function startSerifGame(){
+    localStorage.setItem('gameversion','Serif')
+    gameBoardEl.style.display = "block"
+    finishGameEl.style.display = "none"
+    resetBoard()
+    deckOfQuestions.length = 0
+    startGame(localStorage.getItem('gameversion'))
+}
+
+/* FUNCTIONS */
+function startGame(version){
+    if (version === 'Serif')
         buildSerifGame()
-    else if (localStorageEl === 'sans-serif')
+    else if (version === 'Sans-Serif')
         buildSansSerifGame()
     totalNumOfQuestionsEl.innerText = deckOfQuestions.length
     presentQuestion(deckOfQuestions[0])
@@ -77,7 +99,7 @@ function presentQuestion(deckQuestion){
     setAnswers(deckQuestion)
 }
 
-function goTonextQuestion(){
+function goToNextQuestion(){
     currentQuestion++
     if (deckOfQuestions[currentQuestion]){
         presentQuestion(deckOfQuestions[currentQuestion])
@@ -98,9 +120,16 @@ function checkAnswer(question,userInput){
 
 function checkIfDone(question){
     if (!deckOfQuestions[question.qNum]){
-        nextQuestionEl.innerHTML = "<a href='index.html'>Start over?</a>"
-        nextQuestionEl.removeEventListener('click', goTonextQuestion)
+        nextQuestionEl.innerText = "Finish game"
+        nextQuestionEl.removeEventListener('click', goToNextQuestion)
+        nextQuestionEl.addEventListener('click',showEndGameBoard)
     }
+}
+
+function showEndGameBoard(){
+    gameBoardEl.style.display = "none"
+    finishGameEl.style.display = "block"
+    finalScoreEl.innerText = "Final Score: " + score
 }
 
 function showCorrect(correctAnswer){
@@ -138,7 +167,7 @@ function setAnswers(question){
     ans4El.innerText = question.font4
 }
 
-function resetBoard(evt){
+function resetBoard(){
     resetScore()
     resetAnswerGrid()
     presentQuestion(deckOfQuestions[0])
@@ -161,16 +190,16 @@ function resetAnswerGrid(){
 }
 
 function buildSerifGame(){
-    const q1 = new Question(1,'Font1','Libre Baskerville','Font3','Font4',2,"assets/seriffont1.png")
-    const q2 = new Question(2,'Playfair Display','Font2','Font3','Font4',1,"assets/seriffont2.png")
-    const q3 = new Question(3,'Font1','Font2','Font3','Source Serif Pro',4,"assets/seriffont3.png")
-    const q4 = new Question(4,'Font1','Merriweather','Font3','Font4',2,"assets/seriffont4.png")
-    const q5 = new Question(5,'Font1','Font2','Forum','Font4',3,"assets/seriffont5.png")
-    const q6 = new Question(6,'Yesiva One','Font2','Font3','Font4',1,"assets/seriffont6.png")
-    const q7 = new Question(7,'Font1','Font2','Font3','Luthier',4,"assets/seriffont7.png")
-    const q8 = new Question(8,'Font1','Font2','Anaktoria','Font4',3,"assets/seriffont8.png")
-    const q9 = new Question(9,'Kumar One','Kumar Two','Kumar Three','Kumar Four',1,"assets/seriffont9.png")
-    const q10 = new Question(10,'Font1','Font2','Noto Serif Display Medium','Font4',3,"assets/seriffont10.png")
+    const q1 = new Question(1,'Garamond','Libre Baskerville','Droid Serif Pro','Sabon',2,"assets/seriffont1.png")
+    const q2 = new Question(2,'Playfair Display','Bodini','Arno Pro','Georgia',1,"assets/seriffont2.png")
+    const q3 = new Question(3,'Bookman Old Style','Palatino','Stempel Schneidler','Source Serif Pro',4,"assets/seriffont3.png")
+    const q4 = new Question(4,'Courier New','Merriweather','Times New Roman','Garamond',2,"assets/seriffont4.png")
+    const q5 = new Question(5,'Walbaum','Stone Serif','Forum','Lucida',3,"assets/seriffont5.png")
+    const q6 = new Question(6,'Yesiva One','Didot','Yesiva Bold','Century',1,"assets/seriffont6.png")
+    const q7 = new Question(7,'Mrs. Eaves','Bembo','Bookman Old Style','Luthier',4,"assets/seriffont7.png")
+    const q8 = new Question(8,'Mermaid','Nouvelle Vague','Anaktoria','Apple Garamond',3,"assets/seriffont8.png")
+    const q9 = new Question(9,'Kumar One','Kumar Two','Kumar Three','Kumar Wide',1,"assets/seriffont9.png")
+    const q10 = new Question(10,'Noto Serif Displau Black','Noto Serif Display Bold','Noto Serif Display Medium','Noto Serif Display Light',3,"assets/seriffont10.png")
     deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return deckOfQuestions   
 }
@@ -178,14 +207,14 @@ function buildSerifGame(){
 function buildSansSerifGame(){
     const q1 = new Question(1,'Arial','Verdana','Ubuntu','Comic Sans',3,"assets/sansfont1.png")
     const q2 = new Question(2,'Open Sans','Arial','Lato','Roboto',4,"assets/sansfont2.png")
-    const q3 = new Question(3,'Font1','Cooper Hewitt','Font3','Font4',2,'assets/sansfont3.png')
-    const q4 = new Question(4, 'Font1','Font2','Raleway','font4',3,'assets/sansfont4.png')
-    const q5 = new Question(5, 'Antic','Font2','Font3','Font4',1,'assets/sansfont5.png')
-    const q6 = new Question(6, 'Font1','Lato','Font3','Font4',2,'assets/sansfont6.png')
-    const q7 = new Question(7, 'Font1','Font2','Font3','Gidole',4,'assets/sansfont7.png')
-    const q8 = new Question(8, 'Font1','Font2','Helveticish','Font4',3,'assets/sansfont8.png')
-    const q9 = new Question(9, 'Monserrat','Font2','Font3','Font4',1,'assets/sansfont9.png')
-    const q10 = new Question(10, 'Font1','Font2','Nunito','Font4',3,'assets/sansfont10.png')
+    const q3 = new Question(3,'Simplifica','Cooper Hewitt','Modern Sans Light','Mohave',2,'assets/sansfont3.png')
+    const q4 = new Question(4, 'Qanelas','Biko','Raleway','Verdana',3,'assets/sansfont4.png')
+    const q5 = new Question(5, 'Antic','Nauman','Leto Text Sans','Quark',1,'assets/sansfont5.png')
+    const q6 = new Question(6, 'Tahoma','Lato','Helvetica','Maven Pro',2,'assets/sansfont6.png')
+    const q7 = new Question(7, 'Futura','Brandon Grotesque','Avenir','Gidole',4,'assets/sansfont7.png')
+    const q8 = new Question(8, 'News Gothic','Helvetica','Helveticish','Gill Sans',3,'assets/sansfont8.png')
+    const q9 = new Question(9, 'Monserrat','Gram','Tahoma','Simplifica',1,'assets/sansfont9.png')
+    const q10 = new Question(10, 'Nunito Sans Regular','Nunito Light','Nunito','Nunito Sans Black',3,'assets/sansfont10.png')
     deckOfQuestions.push(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return deckOfQuestions
 }

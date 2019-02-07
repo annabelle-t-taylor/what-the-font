@@ -6,9 +6,9 @@ serifEl.addEventListener('click',playSerif)
 sansSerifEl.addEventListener('click',playSansSerif)
 
 function playSerif(){
-    localStorage.setItem("gameversion","serif")
+    localStorage.setItem("gameversion","Serif")
 }
 
 function playSansSerif(){
-    localStorage.setItem("gameversion", "sans-serif");
+    localStorage.setItem("gameversion", "Sans-Serif");
 }
