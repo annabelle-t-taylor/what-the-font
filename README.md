@@ -4,11 +4,7 @@ What the Font (stylized as *What the F\*NT?!*) is a browser-based trivia game te
 
 ### Installing
 
-To play online, simply visit the project's GitHub Pages link at [annabelle-t-taylor.github.io/what-the-font](annabelle-t-taylor.github.io/what-the-font). However, if you'd like a local version you can visit [the original repo](https://github.com/annabelle-t-taylor/what-the-font) and click "Clone or download"
-
-# ![](assets/Git-repo.png)
-
-In your terminal, navigate to the directory you want to copy the project into and run the following command:
+To play online, simply visit the project's GitHub Pages link at [annabelle-t-taylor.github.io/what-the-font](annabelle-t-taylor.github.io/what-the-font). However, if you'd like a local version you can visit [the original repo](https://github.com/annabelle-t-taylor/what-the-font) and click "Clone or download." In your terminal, navigate to the directory you want to copy the project into and run the following command:
 
 ```
 git clone https://github.com/annabelle-t-taylor/what-the-font
@@ -41,29 +37,29 @@ Once a section was working as expected (I don't dare say "done," as that seems t
 This abstraction built on itself, and eventually adding new features (like the "Play Again" screen) simply involved creating a new function that called a different combination of smaller, existing functions.
 
 ## Key Features
-#Local Storage: Selecting a deck to play
+### Local Storage: Selecting a deck to play
 There is only one gameplay file (game.html), but there are currently two versions of the game: serif and sans-serif. They follow the same exact logic and only differ in what questions they present. Rather than write separate files and logics for these versions, I used HTML5's local storage capabilities to pass information between pages. I attached an event listener to both buttons and wrote an appropriate Storage object based on the user's selection. Assuming that the user hasn't restarted their browser session, the object is still accessible when they go to the next page. My game's JavaScript file, script.js, reads the object and creates the game's deck depending on its value.
 
-#Prefers-reduced-motion: A media query for accessibility
+### Prefers-reduced-motion: A media query for accessibility
 I'll admit it: I had a little too much fun learning CSS3 animations. However, with my focus on accessibility, I know that there are plenty of folks who would be much happier if the text *weren't* bouncing all over the place. I found the [prefers-reduced-motion media feature on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) and was able to attach it to my game's styling, gameStyles.css. If someone has the prefered-reduced-motion attribute set to "reduce" for their browser, then they'll be presented with an animation-less (but still otherwise useable) version of my project.
 
-#Skip Link: Tab navigation on the homepage
+### Skip Link: Tab navigation on the homepage
 On the topic of accessibility, I recognize that some folks rely on keyboard navigation to get around the web. I haven't built out tab navigation for the entire game (see next section), but I did start out with a Skip Link on the homepage to allow users to toggle between the two deck options with their Tab key.
 
 ## Potential Addtions and Future Goals
-#Accessibility
+### Accessibility
 * Add WAI-ARIA attributes to both HTML files to improve accessibility
 ⋅⋅⋅Web accessibility is a major passion of mine, and I'm just skimming the surface of all that is currently possible in building out more accessible applications. WAI-ARIA attributes would make scanning the project easier for screen readers, thus allowing for a broader audience.
 * Expand tab navigation to the main game
 ⋅⋅⋅I currently have keyboard navigation enabled on the homepage in a simple tab-to-toggle function. However, I'm not currently sure how to best approach adding adding keyboard navigation to the game. I could expand my current function to allow users to tab between the four answer choices for each question, but that doesn't provide access to the Reset and Home buttons in the header. On the other hand, simply scrolling through every link on the page on a single loop seems ineffecient.
 
-#Responsive Design
+### Responsive Design
 * Change explicit pixel measurements in CSS to relative measurements
 ⋅⋅⋅In my free time, I spend more time accessing the web on my phone than I do on my desktop, but as it stands this application is not terribly mobile friendly (at least in portrait mode). I could write out a series of media queries, but I think that a lot of my design woes would be resolved with relative measurements; don't take up 650p pixels, just take up "most of the screen!"
 * Create a mobile-friendly header for the game
 ⋅⋅⋅Even with these measurements exchanged, the header would still be terribly crowded on mobile. I think that displaying the score and a burger bar (containing the Reset and Home buttons within the bar) would make it appear less cluttered on mobile devices.
 
-#Game Design
+### Game Design
 * Load font families into the application instead of using images of text
 ⋅⋅⋅As a general rule, I am against using images to represent text. I broke this rule in creating this game, though, because it dawned on me that some users may not have every font used in the game installed on their computer. There has to be a way to install the fonts directly into the program as an asset to account for this, but so far I haven't figured out how to accomplish this.
 * More deck options
