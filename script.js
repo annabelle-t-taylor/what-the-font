@@ -105,8 +105,8 @@ function checkIfDone(question){
 }
 
 function showEndGameBoard(){
-    gameBoardEl.style.display = "flex"
-    finishGameEl.style.display = "block"
+    gameBoardEl.style.display = "bock"
+    finishGameEl.style.display = "flex"
     finalScoreEl.innerText = "Final Score: " + score
 }
 
