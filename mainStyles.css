@@ -1,4 +1,18 @@
-body{
+aside{
+    display: none;
+    flex: 0;
+    background: #fa8072;
+    color: #333;
+    border: 2px solid #333;
+    max-width: 200px;
+    height: 40px;
+    font-family: "Ubuntu";
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
