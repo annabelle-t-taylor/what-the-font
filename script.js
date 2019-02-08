@@ -1,7 +1,3 @@
-
-//thanks to the following for helping me generate the sample sentences
-/*https://forums.appleinsider.com/discussion/57707/a-better-font-sentence*/
-
 /* VARIABLES */
 //Game variables
 const gameBoardEl = document.querySelector('.game-board')
@@ -102,7 +98,7 @@ function checkAnswer(question,userInput){
 
 function checkIfDone(question){
     if (!deckOfQuestions[question.qNum]){
-        nextQuestionEl.innerText = "Finish game!"
+        nextQuestionEl.innerText = "Finish game"
         nextQuestionEl.removeEventListener('click', goToNextQuestion)
         nextQuestionEl.addEventListener('click',showEndGameBoard)
     }
