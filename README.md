@@ -4,11 +4,7 @@ What the Font (stylized as *What the F\*NT?!*) is a browser-based trivia game te
 
 ### Installing
 
-To play online, simply visit the project's GitHub Pages link at [annabelle-t-taylor.github.io/what-the-font](annabelle-t-taylor.github.io/what-the-font). However, if you'd like a local version you can visit [the original repo](https://github.com/annabelle-t-taylor/what-the-font) and click "Clone or download"
-
-# ![](assets/Git-repo.png)
-
-In your terminal, navigate to the directory you want to copy the project into and run the following command:
+To play online, simply visit the project's GitHub Pages link at [annabelle-t-taylor.github.io/what-the-font](annabelle-t-taylor.github.io/what-the-font). However, if you'd like a local version you can visit [the original repo](https://github.com/annabelle-t-taylor/what-the-font) and click "Clone or download." In your terminal, navigate to the directory you want to copy the project into and run the following command:
 
 ```
 git clone https://github.com/annabelle-t-taylor/what-the-font
