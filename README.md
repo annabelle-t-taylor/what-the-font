@@ -69,3 +69,30 @@ On the topic of accessibility, I recognize that some folks rely on keyboard navi
 * Thanks to [Hammad Malik](https://github.com/tomatohammado) for his guidance on this project, particularly as I struggled with figuring out local storage to let users select a deck.
 * Snaps for [Billie Thompson](https://github.com/PurpleBooth), whose [README.md template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is a real lifesaver (and timesaver!) for us new to markup.
 * Additional kudos to the fine folks in [this appleinsider forum discussion](https://forums.appleinsider.com/discussion/57707/a-better-font-sentence) for the expansive list of pangrams used in the sample sentences.
+
+### Skip Link: Tab navigation on the homepage
+On the topic of accessibility, I recognize that some folks rely on keyboard navigation to get around the web. I haven't built out tab navigation for the entire game (see next section), but I did start out with a Skip Link on the homepage to allow users to toggle between the two deck options with their Tab key.
+
+## Potential Addtions and Future Goals
+### Accessibility
+* Add WAI-ARIA attributes to both HTML files to improve accessibility
+⋅⋅⋅Web accessibility is a major passion of mine, and I'm just skimming the surface of all that is currently possible in building out more accessible applications. WAI-ARIA attributes would make scanning the project easier for screen readers, thus allowing for a broader audience.
+* Expand tab navigation to the main game
+⋅⋅⋅I currently have keyboard navigation enabled on the homepage in a simple tab-to-toggle function. However, I'm not currently sure how to best approach adding adding keyboard navigation to the game. I could expand my current function to allow users to tab between the four answer choices for each question, but that doesn't provide access to the Reset and Home buttons in the header. On the other hand, simply scrolling through every link on the page on a single loop seems ineffecient.
+
+### Responsive Design
+* Change explicit pixel measurements in CSS to relative measurements
+⋅⋅⋅In my free time, I spend more time accessing the web on my phone than I do on my desktop, but as it stands this application is not terribly mobile friendly (at least in portrait mode). I could write out a series of media queries, but I think that a lot of my design woes would be resolved with relative measurements; don't take up 650p pixels, just take up "most of the screen!"
+* Create a mobile-friendly header for the game
+⋅⋅⋅Even with these measurements exchanged, the header would still be terribly crowded on mobile. I think that displaying the score and a burger bar (containing the Reset and Home buttons within the bar) would make it appear less cluttered on mobile devices.
+
+### Game Design
+* Load font families into the application instead of using images of text
+⋅⋅⋅As a general rule, I am against using images to represent text. I broke this rule in creating this game, though, because it dawned on me that some users may not have every font used in the game installed on their computer. There has to be a way to install the fonts directly into the program as an asset to account for this, but so far I haven't figured out how to accomplish this.
+* More deck options
+⋅⋅⋅Less technical and more whimsy: I'd like to expand the existing decks to include more fonts, but I'd also like to create more decks. One of my instructors, Hammad (link to GitHub in acknowledgements), suggested adding an emoji deck where users match the idea with the Linux command to generate it; I think that this would be :100:.
+
+## Acknowledgments
+* Thanks to [Hammad Malik](https://github.com/tomatohammado) for his guidance on this project, particularly as I struggled with figuring out local storage to let users select a deck.
+* Snaps for [Billie Thompson](https://github.com/PurpleBooth), whose [README.md template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is a real lifesaver (and timesaver!) for us new to markup.
+* Additional kudos to the fine folks in [this appleinsider forum discussion](https://forums.appleinsider.com/discussion/57707/a-better-font-sentence) for the expansive list of pangrams used in the sample sentences.
